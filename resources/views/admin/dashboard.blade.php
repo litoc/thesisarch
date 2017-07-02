@@ -11,7 +11,7 @@
             <span class="info-box-icon"><i class="ion ion-earth"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Web Applications</span>
-                <span class="info-box-number">100</span>
+                <span class="info-box-number">{{ $countWebApp }}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -21,7 +21,7 @@
             <span class="info-box-icon"><i class="ion ion-social-apple"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Mobile Applications</span>
-                <span class="info-box-number">50</span>
+                <span class="info-box-number">{{ $countMobileApp }}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -32,7 +32,7 @@
             <span class="info-box-icon"><i class="ion ion-social-android"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Robotics</span>
-                <span class="info-box-number">20</span>
+                <span class="info-box-number">{{ $countRobotics }}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -43,7 +43,7 @@
             <span class="info-box-icon"><i class="ion ion-podium"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Total</span>
-                <span class="info-box-number">170</span>
+                <span class="info-box-number">{{ $totalCount }}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -58,54 +58,21 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <ul class="products-list product-list-in-box">
-                    <li class="item">
-                      <div class="product-img">
-                        <img src="../img/50x50.png" alt="Product Image">
-                      </div>
-                      <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title">Samsung TV</a>
-                            <span class="product-description">
-                              Samsung 32" 1080p 60Hz LED Smart HDTV.
-                            </span>
-                      </div>
-                    </li>
-                    <!-- /.item -->
-                    <li class="item">
-                      <div class="product-img">
-                        <img src="../img/50x50.png" alt="Product Image">
-                      </div>
-                      <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title">Bicycle</a>
-                            <span class="product-description">
-                              26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                            </span>
-                      </div>
-                    </li>
-                    <!-- /.item -->
-                    <li class="item">
-                      <div class="product-img">
-                        <img src="../img/50x50.png" alt="Product Image">
-                      </div>
-                      <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title">Xbox One </a>
-                            <span class="product-description">
-                              Xbox One Console Bundle with Halo Master Chief Collection.
-                            </span>
-                      </div>
-                    </li>
-                    <!-- /.item -->
-                    <li class="item">
-                      <div class="product-img">
-                        <img src="../img/50x50.png" alt="Product Image">
-                      </div>
-                      <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title">PlayStation 4</a>
-                            <span class="product-description">
-                              PlayStation 4 500GB Console (PS4)
-                            </span>
-                      </div>
-                    </li>
-                    <!-- /.item -->
+                    @if(!empty($recentlyAdded))
+                        @foreach($recentlyAdded as $key => $item)
+                        <li class="item">
+                          <div class="product-img">
+                            <img src="../img/50x50.png" alt="Product Image">
+                          </div>
+                          <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">{{ $item->title }}</a>
+                                <span class="product-description">
+                                  {{ $item->description }}
+                                </span>
+                          </div>
+                        </li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
             <!-- /.box-body -->
