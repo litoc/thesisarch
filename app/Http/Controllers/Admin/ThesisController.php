@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\PictureUploadRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Config;
@@ -11,7 +12,7 @@ use App\Models\Thesis;
 use Illuminate\Support\Facades\Input;
 
 
-class ListController extends Controller
+class ThesisController extends Controller
 {
     public function __construct()
     {
@@ -36,6 +37,11 @@ class ListController extends Controller
         return view('admin.thesis.create', $data);
     }
 
+    public function save()
+    {
+
+    }
+
     public function update()
     {
         $data = [
@@ -49,7 +55,7 @@ class ListController extends Controller
     {
         // headers
         $contents = [
-            'title', 'description', 'year published', 'category', 'tags', 'author', 'course'
+            'title', 'description', 'year published', 'category', 'tags', 'author', 'course', 'picture'
         ];
 
         return Excel::create('Sample Thesis Excel', function($excel) use ($contents) {
@@ -60,12 +66,13 @@ class ListController extends Controller
         })->download($type);
     }
 
+
     public function bulkUpload()
     {
         if (Input::hasFile('import_file')) {
             $path = Input::file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {})->get();
-            
+
             if (!empty($data) && $data->count()) {
                 foreach ($data as $key => $value) {
                     $insert[] = [
@@ -82,6 +89,24 @@ class ListController extends Controller
                 }
             }
         }
+
+        return back();
+    }
+
+    public function pictureUpload(PictureUploadRequest $request)
+    {
+        foreach ($request->upload_pics as $picture) {
+            $filename = $picture->store('pictures');
+            $origname = $picture->getClientOriginalName();
+
+            preg_match('/(\d+)-(\w+)/',$origname,$matches);
+
+            Pictures::create([
+                'thesis_id' => $product->id,
+                'filename' => $filename
+            ]);
+        }
+        return 'Upload successful!';
 
         return back();
     }

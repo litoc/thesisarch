@@ -12,6 +12,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#list" data-toggle="tab" aria-expanded="true">List</a></li>
               <li class=""><a href="#bulk-upload" data-toggle="tab" aria-expanded="false">Bulk Upload</a></li>
+              <li class=""><a href="#picture-upload" data-toggle="tab" aria-expanded="false">Picture Upload</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="list">
@@ -75,6 +76,37 @@
                             {{ csrf_field() }}
                             <input type="file" name="import_file" />
                             <button class="btn btn-primary">Import File</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+
+                <div class="tab-pane" id="picture-upload">
+                    <div class="container">
+
+                       Pls follow the required filename convention for the images to be uploaded:<br />
+                       <div style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;999999-XXXXXXXXXXXXXXXXXXXX</div>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The digits (999999) *must* contain the Thesis Id<br />
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Xs (XXXXXXXXXXXXXXXXXXXX) refer to the Thesis Description<br />
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The dash (-) *must* separate the Thesis Id and Thesis Description<br />
+						</div>
+
+						@if ($errors->any())
+    						<div class="alert alert-danger">
+        						<ul>
+            						@foreach ($errors->all() as $error)
+                						<li>{{ $error }}</li>
+            						@endforeach
+        						</ul>
+    						</div>
+						@endif
+
+                        <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;"
+                            action="{{ route('upload-new-pictures') }}"
+                            class="form-horizontal" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <input type="file" name="upload_pics[]" multiple />
+                            <button class="btn btn-primary">Upload Pictures</button>
                         </form>
                     </div>
                 </div>

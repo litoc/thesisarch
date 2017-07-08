@@ -1,34 +1,34 @@
-<?php 
- 
-/* 
-|-------------------------------------------------------------------------- 
-| Web Routes 
-|-------------------------------------------------------------------------- 
-| 
-| Here is where you can register web routes for your application. These 
-| routes are loaded by the RouteServiceProvider within a group which 
-| contains the "web" middleware group. Now create something great! 
-| 
-*/ 
-// Main site 
-Route::get('/', function () { 
-    return view('welcome'); 
-}); 
- 
-// Admin site 
-Auth::routes(); 
-Route::get('/admin/login', 'Auth\LoginController@showLoginForm') 
-  ->name('adminLogin'); 
-Route::post('/admin/login', 'Auth\LoginController@login') 
-  ->name('adminLogin'); 
-Route::get('/admin/logout', 'Auth\LoginController@logout') 
-  ->name('adminLogout'); 
- 
-Route::group([ 
-  'namespace' => 'Admin', 
-  'middleware' => ['auth'], 
-  'prefix' => 'admin', 
-], function () { 
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+// Main site
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Admin site
+Auth::routes();
+Route::get('/admin/login', 'Auth\LoginController@showLoginForm')
+  ->name('adminLogin');
+Route::post('/admin/login', 'Auth\LoginController@login')
+  ->name('adminLogin');
+Route::get('/admin/logout', 'Auth\LoginController@logout')
+  ->name('adminLogout');
+
+Route::group([
+  'namespace' => 'Admin',
+  'middleware' => ['auth'],
+  'prefix' => 'admin',
+], function () {
 
     Route::get('/dashboard', [
         'as' => 'dashboard',
@@ -51,41 +51,47 @@ Route::group([
         'uses' => 'AnnouncementController@create',
     ]);
 
-    # Thesis 
+    # Thesis
     Route::get('/thesis', [
         'as' => 'thesis',
-        'uses' => 'ListController@index',
+        'uses' => 'ThesisController@index',
     ]);
 
     Route::get('/thesis/create', [
         'as' => 'create-thesis',
-        'uses' => 'ListController@create',
+        'uses' => 'ThesisController@create',
     ]);
 
     Route::get('/thesis/update/{id}', [
         'as' => 'update-thesis',
-        'uses' => 'ListController@update',
+        'uses' => 'ThesisController@update',
     ]);
 
     Route::post('/thesis/update/{id}', [
         'as' => 'update-thesis',
-        'uses' => 'ListController@update',
+        'uses' => 'ThesisController@update',
     ]);
 
     # Download template file to import new thesis
     Route::get('/thesis/downloadSampleFile/{type}', [
         'as' => 'download-sample-file',
-        'uses' => 'ListController@downloadSampleFile',
+        'uses' => 'ThesisController@downloadSampleFile',
     ]);
 
     # Import new thesis
     Route::post('/thesis/bulkUpload', [
         'as' => 'import-new-thesis',
-        'uses' => 'ListController@bulkUpload',
+        'uses' => 'ThesisController@bulkUpload',
+    ]);
+
+    # Upload new pictures
+    Route::post('/thesis/pictureUpload', [
+        'as' => 'upload-new-pictures',
+        'uses' => 'ThesisController@pictureUpload',
     ]);
 
     Route::post('/thesis/create', [
         'as' => 'create-thesis',
-        'uses' => 'ListController@create',
+        'uses' => 'ThesisController@create',
     ]);
-}); 
+});
