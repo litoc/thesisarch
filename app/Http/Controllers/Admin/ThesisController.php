@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\PictureUploadRequest;
-use Illuminate\Http\Request;
+use App\Pictures;
 use App\Http\Controllers\Controller;
-use Config;
-use Excel;
-use Redirect;
+use App\Http\Requests\PictureUploadRequest;
 use App\Models\Thesis;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Excel;
 
 
 class ThesisController extends Controller
@@ -84,7 +83,7 @@ class ThesisController extends Controller
                     ];
                 }
                 if (!empty($insert)) {
-                    \DB::table('thesis')->insert($insert);
+                    Thesis::insert($insert);
                     return Redirect::back()->with(['msg', 'The Message']);
                 }
             }
