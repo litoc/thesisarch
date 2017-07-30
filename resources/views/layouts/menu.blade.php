@@ -16,9 +16,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('adminLogin') }}">Admin</a>
-                    </li>
+                    @if (Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('adminLogout') }}">
+                                Logout
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('adminLogin') }}">Admin</a>
+                        </li>
+                    @endif
+
                 </ul>
             </div>
         </div>

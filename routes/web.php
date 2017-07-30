@@ -1,34 +1,34 @@
-<?php 
- 
-/* 
-|-------------------------------------------------------------------------- 
-| Web Routes 
-|-------------------------------------------------------------------------- 
-| 
-| Here is where you can register web routes for your application. These 
-| routes are loaded by the RouteServiceProvider within a group which 
-| contains the "web" middleware group. Now create something great! 
-| 
-*/ 
-// Main site 
-Route::get('/', function () { 
-    return view('welcome'); 
-}); 
- 
-// Admin site 
-Auth::routes(); 
-Route::get('/admin/login', 'Auth\LoginController@showLoginForm') 
-  ->name('adminLogin'); 
-Route::post('/admin/login', 'Auth\LoginController@login') 
-  ->name('adminLogin'); 
-Route::get('/admin/logout', 'Auth\LoginController@logout') 
-  ->name('adminLogout'); 
- 
-Route::group([ 
-  'namespace' => 'Admin', 
-  'middleware' => ['auth'], 
-  'prefix' => 'admin', 
-], function () { 
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+// Main site
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Admin site
+Auth::routes();
+Route::get('/admin/login', 'Auth\LoginController@showLoginForm')
+  ->name('adminLogin');
+Route::post('/admin/login', 'Auth\LoginController@login')
+  ->name('adminLogin');
+Route::get('/admin/logout', 'Auth\LoginController@logout')
+  ->name('adminLogout');
+
+Route::group([
+  'namespace' => 'Admin',
+  //'middleware' => ['auth'],
+  'prefix' => 'admin',
+], function () {
 
     Route::get('/dashboard', [
         'as' => 'dashboard',
@@ -47,11 +47,21 @@ Route::group([
     ]);
 
     Route::post('/announcement/create', [
-        'as' => 'create-announcement',
-        'uses' => 'AnnouncementController@create',
+        'as' => 'save-announcement',
+        'uses' => 'AnnouncementController@save',
     ]);
 
-    # Thesis 
+    Route::post('/announcement/modify/{id}', [
+        'as' => 'update-announcement',
+        'uses' => 'AnnouncementController@save',
+    ]);
+
+    Route::post('/announcement/delete/{id}', [
+        'as' => 'remove-announcement',
+        'uses' => 'AnnouncementController@save',
+    ]);
+
+    # Thesis
     Route::get('/thesis', [
         'as' => 'thesis',
         'uses' => 'ListController@index',
@@ -88,4 +98,4 @@ Route::group([
         'as' => 'create-thesis',
         'uses' => 'ListController@create',
     ]);
-}); 
+});

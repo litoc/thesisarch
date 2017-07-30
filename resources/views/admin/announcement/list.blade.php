@@ -16,17 +16,6 @@
                         <a href="{{ route('create-announcement') }}" class="btn btn-primary">
                             <i class="fa fa-plus"></i> Create
                         </a>
-                        <!--<div class="input-group input-group-sm pull-right" style="width: 250px;">
-                            <input type="text" name="table_search" 
-                                class="form-control pull-right" 
-                                placeholder="Search"
-                            />
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>-->
                     </div>
                     <table class="table table-hover">
                         <tbody>
@@ -42,15 +31,18 @@
                                 <td colspan="5" class="text-center text-danger"> No announcement(s) found. </td>
                             </tr>
                             @else
-                                @foreach($announcements as $announcement)
+                                @foreach($announcements as $key => $announcement)
                                 <tr>
-                                    <td>{{ $announcement->id }}</td>
-                                    <td>{{ $announcement->title }}</td>
-                                    <td>{{ $announcement->description }}</td>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ title_case($announcement->subject) }}</td>
+                                    <td>{{ ucfirst($announcement->description) }}</td>
                                     <td>{{ $announcement->created_by }} at {{ $announcement->created_at }}</td>
                                     <td>
                                         <a href="{{ route('update-announcement', ['id' => $announcement->id]) }}">
                                             <i class="fa fa-pencil"></i>
+                                        </a> |
+                                        <a href="{{ route('remove-announcement', ['id' => $announcement->id]) }}">
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -58,9 +50,11 @@
                             @endif
                         </tbody>
                     </table>
+
+                    {{ $announcements->links() }}
                 </div>
                 <!-- /.tab-pane -->
-                
+
                 <div class="tab-pane" id="preview">
                 </div>
                 <!-- /.tab-pane -->
