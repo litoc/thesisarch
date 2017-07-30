@@ -51,14 +51,19 @@ Route::group([
         'uses' => 'AnnouncementController@save',
     ]);
 
-    Route::post('/announcement/modify/{id}', [
+    Route::get('/announcement/modify/{id}', [
         'as' => 'update-announcement',
-        'uses' => 'AnnouncementController@save',
+        'uses' => 'AnnouncementController@update',
     ]);
 
-    Route::post('/announcement/delete/{id}', [
+    Route::post('/announcement/modify/{id}', [
+        'as' => 'update-announcement',
+        'uses' => 'AnnouncementController@saveUpdate',
+    ]);
+
+    Route::get('/announcement/delete/{id}', [
         'as' => 'remove-announcement',
-        'uses' => 'AnnouncementController@save',
+        'uses' => 'AnnouncementController@delete',
     ]);
 
     # Thesis

@@ -8,7 +8,7 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#post" data-toggle="tab" aria-expanded="true">Post</a></li>
-              <li class=""><a href="#preview" data-toggle="tab" aria-expanded="false">Preview</a></li>
+              <!--<li class=""><a href="#preview" data-toggle="tab" aria-expanded="false">Preview</a></li>-->
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="post">
@@ -51,7 +51,9 @@
                         </tbody>
                     </table>
 
-                    {{ $announcements->links() }}
+                    <div class="text-center">
+                        {{ $announcements->links() }}
+                    </div>
                 </div>
                 <!-- /.tab-pane -->
 

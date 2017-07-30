@@ -29,7 +29,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::orderBy('created_at', 'desc')->paginate(2);
+        $announcements = Announcement::orderBy('created_at', 'desc')->paginate(15);
 
         $data = [
             'announcements' => $announcements,
@@ -74,5 +74,50 @@ class AnnouncementController extends Controller
             return back()->with('success', 'successfully created.');
         }
 
+    }
+
+    public function update(Request $request)
+    {
+        $data['announcement'] = Announcement::find($request->id);
+
+        return view('admin.announcement.modify', $data);
+    }
+
+    public function saveUpdate(Request $request)
+    {
+        $data = [
+            'subject' => $request->subject,
+            'description' => $request->description,
+        ];
+
+        $validator = Validator::make($data, [
+            'subject' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->errors();
+            foreach ($messages->all() as $message) {
+                Log::error($message);
+            }
+
+            return back()->withErrors($validator);
+        }
+
+        $updated = Announcement::where(['id' => $request->id])->update($data);
+        if ($updated) {
+            return back()->with('success', 'successfully updated.');
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $announcement = Announcement::find($request->id);
+
+        $deleted = $announcement->delete();
+
+        if ($deleted) {
+            return back()->with('success', 'successfully deleted.');
+        }
     }
 }
