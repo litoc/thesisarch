@@ -24,11 +24,11 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $data = [
-            'countWebApp' => Thesis::where(['type' => 'Web App'])->count(),
-            'countMobileApp' => Thesis::where(['type' => 'Mobile App'])->count(),
-            'countRobotics' => Thesis::where(['type' => 'Robotics'])->count(),
+            'countWebApp' => Thesis::where(['category' => 'Web App'])->count(),
+            'countMobileApp' => Thesis::where(['category' => 'Mobile App'])->count(),
+            'countRobotics' => Thesis::where(['category' => 'Robotics'])->count(),
             'totalCount' => Thesis::get()->count(),
 
             'recentlyAdded' => Thesis::orderBy('created_at', 'DESC')->get()->take(10)

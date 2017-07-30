@@ -12,5 +12,12 @@ class Thesis extends Model
      * @var string
      */
     protected $table = 'thesis';
+    protected $fillable = ['title', 'description', 'category', 'tags', 'published_at'];
+
     public $timestamps = ['created_at', 'updated_at'];
+
+    public function images() {
+        return $this->hasMany(Image::class);
+    }
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -24,7 +25,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'pam@amathesisarchive.com',
             'password' => bcrypt('secret'),
         ]);
-        
+
         $users->insert([
             'name' => 'Rufino',
             'email' => 'rufino@amathesisarchive.com',

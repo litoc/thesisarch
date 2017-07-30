@@ -9,7 +9,22 @@
             <div class="box-header with-border"></div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+
+			@if ($errors->any())
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+    						<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+
+           <form class="form-horizontal"
+					action="{{ route('save-thesis') }}"
+					class="form-horizontal" method="post"
+					enctype="multipart/form-data">
+                {{ csrf_field() }}
 				<div class="box-body">
 					<div class="form-group">
 						<label for="title" class="col-sm-2 control-label">Title</label>
@@ -54,6 +69,13 @@
 							<input type="text" class="form-control" name="tags" id="tags"
 								placeholder="php, android, objective-c, mysql, jquery, ..."
 							/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="upload_pic" class="col-sm-2 control-label">Picture</label>
+						<div class="col-sm-10">
+							<input type="file" name="upload_pic" />
 						</div>
 					</div>
 				</div>

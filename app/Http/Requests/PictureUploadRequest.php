@@ -24,13 +24,9 @@ class PictureUploadRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [];
-
-        $photos = count($this->input('upload_pics'));
-        foreach(range(0, $photos) as $ndx) {
-            $rules['upload_pics' . $ndx]  = 'image|mimes:jpeg,bmp,png|size:2000|filename_regex:/^\d+-\w+/';
-            //
-        };
+        return [
+            'upload_pics' => 'image|mimes:jpeg,bmp,png|size:2000|filename_regex:/^\d+-\w+/',
+        ];
 
         return $rules;
     }

@@ -12,7 +12,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#list" data-toggle="tab" aria-expanded="true">List</a></li>
               <li class=""><a href="#bulk-upload" data-toggle="tab" aria-expanded="false">Bulk Upload</a></li>
-              <li class=""><a href="#picture-upload" data-toggle="tab" aria-expanded="false">Picture Upload</a></li>
+              <li class=""><a href="#image-upload" data-toggle="tab" aria-expanded="false">Image Upload</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="list">
@@ -30,6 +30,7 @@
                                 <th>Category</th>
                                 <th>Tags</th>
                                 <th>Year</th>
+                                <th>Picture</th>
                                 <th>Action</th>
                             </tr>
                             @if (empty($lists))
@@ -42,16 +43,17 @@
                                     <td>{{ $list->id }}</td>
                                     <td>{{ title_case($list->title) }}</td>
                                     <td>{{ ucfirst($list->description) }}</td>
-                                    <td>{{ $list->type }}</td>
+                                    <td>{{ $list->category }}</td>
                                     <td>{{ $list->tags }}</td>
                                     <td><span class="label label-success">{{ $list->published_at }}</span></td>
+                                    <td><img class="img-responsive"src="{{ empty($list->image)? '' : url($list->image)  }}" alt="default img" /></td>
                                     <td>
                                         <a href="{{ route('update-thesis', ['id' => $list->id]) }}">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </td>
                                 </tr>
-                                @endforeach
+                               @endforeach
                             @endif
                         </tbody>
                     </table>
@@ -81,16 +83,15 @@
                 </div>
                 <!-- /.tab-pane -->
 
-                <div class="tab-pane" id="picture-upload">
+                <div class="tab-pane" id="image-upload">
                     <div class="container">
-
                        Pls follow the required filename convention for the images to be uploaded:<br />
-                       <div style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;999999-XXXXXXXXXXXXXXXXXXXX</div>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The digits (999999) *must* contain the Thesis Id<br />
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Xs (XXXXXXXXXXXXXXXXXXXX) refer to the Thesis Description<br />
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The dash (-) *must* separate the Thesis Id and Thesis Description<br />
-						</div>
-
+                       <div style="font-weight:bold; padding-left:25pt; padding-right: 25pt;">
+                       		999999-XXXXXXXXXXXXXXXXXXXX</div>
+					   <div style="font-weight:bold; padding-left:50pt; padding-right: 50pt;">
+                       		The Xs (XXXXXXXXXXXXXXXXXXXX) refer to the Thesis Description<br />
+                       		The dash (-) *must* separate the Thesis Id and Thesis Description<br />
+					   </div>
 						@if ($errors->any())
     						<div class="alert alert-danger">
         						<ul>
@@ -102,11 +103,11 @@
 						@endif
 
                         <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;"
-                            action="{{ route('upload-new-pictures') }}"
+                            action="{{ route('upload-new-images') }}"
                             class="form-horizontal" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <input type="file" name="upload_pics[]" multiple />
-                            <button class="btn btn-primary">Upload Pictures</button>
+                            <input type="file" name="upload_imgs[]" multiple />
+                            <button class="btn btn-primary">Upload Images</button>
                         </form>
                     </div>
                 </div>

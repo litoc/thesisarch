@@ -66,6 +66,11 @@ Route::group([
         'uses' => 'ThesisController@create',
     ]);
 
+    Route::post('/thesis/save', [
+        'as' => 'save-thesis',
+        'uses' => 'ThesisController@save',
+    ]);
+
     Route::get('/thesis/update/{id}', [
         'as' => 'update-thesis',
         'uses' => 'ThesisController@update',
@@ -89,9 +94,9 @@ Route::group([
     ]);
 
     # Upload new pictures
-    Route::post('/thesis/pictureUpload', [
-        'as' => 'upload-new-pictures',
-        'uses' => 'ThesisController@pictureUpload',
+    Route::post('/thesis/imageUpload', [
+        'as' => 'upload-new-images',
+        'uses' => 'ThesisController@imageUpload',
     ]);
 
     Route::post('/thesis/create', [

@@ -17,9 +17,10 @@ class ThesisTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
-            $table->string('type');
+            $table->string('category');
             $table->string('tags');
             $table->string('published_at');
+            $table->string('image');
             $table->nullableTimestamps();
         });
     }
