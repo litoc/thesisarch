@@ -76,9 +76,9 @@ Route::group([
         'uses' => 'ThesisController@update',
     ]);
 
-    Route::post('/thesis/update/{id}', [
-        'as' => 'update-thesis',
-        'uses' => 'ThesisController@update',
+    Route::post('/thesis/updatesave/{id}', [
+        'as' => 'update-save-thesis',
+        'uses' => 'ThesisController@updateSave',
     ]);
 
     # Download template file to import new thesis

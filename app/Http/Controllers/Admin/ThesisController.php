@@ -95,32 +95,99 @@ class ThesisController extends Controller
             ->withInput();
         }
 
+        $filename = '';
         $image = $request->file('upload_pic');
+        if (Input::hasFile('upload_pic')) {
+            $filename = $image->store('pictures');
+        }
+
+        $categories = config('categories');
 
         $input = $request->except('_token');
+        //unset($input['upload_pic']);
+        $input['image'] = $filename;
+        $input['category'] = $categories[$input['category']];
+
         $id = Thesis::create($input)->id;
-
-        if (Input::hasFile('upload_img')) {
-            $filename = $image->store('pictures');
-
-            Image::create([
-                'thesis_id' => $id,
-                'filename' => $filename
-            ]);
-        }
 
         return redirect('admin/thesis/create');
     }
 
-    public function update()
+    public function update($id)
     {
-        $data = [
-            'categories' => config('categories'),
-        ];
+        $thesis = Thesis::find($id);
+
+        if ($thesis) {
+
+            $data = [
+                 'categories' => config('categories'),
+                 'thesis' => $thesis
+            ];
+
+            return view('admin/thesis/update', $data);
+
+       }
 
         return 'update thesis';
     }
 
+    public function updateSave(Request $request, $id)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, array(
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'published_at' => 'required',
+            'category' => 'required',
+            'tags' => 'required|max:255',
+            'upload_pic' => 'image|mimes:jpeg,jpg,bmp,png|max:2000'
+         ));
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $thesis = Thesis::find($id);
+
+        if ($thesis->title != $data['title']) {
+            $count = DB::table('thesis')
+            ->select('id')
+            ->where('title', '=', $data['title'])->count();
+
+            if ($count > 0) {
+               return redirect()->back()->withInput()->withErrors($validator);
+            }
+        }
+
+
+        $filename = '';
+        $image = $request->file('upload_pic');
+        if (Input::hasFile('upload_pic')) {
+            $filename = $image->store('pictures');
+        }
+
+        $categories = config('categories');
+
+        $input = $request->except('_token', 'upload_pic');
+        $input['image'] = $filename;
+
+        $thesis->title = $input['title'];
+        $thesis->description = $input['description'];
+        $thesis->category = $categories[$input['category']];
+        $thesis->tags = $input['tags'];
+        $thesis->published_at = $input['published_at'];
+        $thesis->image = $input['image'];
+
+        $save = $thesis->save();
+
+        if (false == $save) {
+            abort(403);
+        }
+
+        $request->session()->flash('alert-success', 'Thesis successfully updated!');
+
+        return redirect('admin/thesis');
+    }
     public function downloadSampleFile($type)
     {
         // headers

@@ -12,7 +12,7 @@ class Thesis extends Model
      * @var string
      */
     protected $table = 'thesis';
-    protected $fillable = ['title', 'description', 'category', 'tags', 'published_at'];
+    protected $fillable = ['title', 'description', 'category', 'tags', 'published_at', 'image'];
 
     public $timestamps = ['created_at', 'updated_at'];
 
