@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Validator;
-use Log;
+use App\Attachment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Announcement;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -48,7 +49,7 @@ class AnnouncementController extends Controller
         return view('admin.announcement.create');
     }
 
-    public function save()
+    public function save(Request $request)
     {
         $data = [
             'subject' => Input::get('subject'),
@@ -69,8 +70,13 @@ class AnnouncementController extends Controller
             return back()->withErrors($validator);
         }
 
-        $created = Announcement::create($data);
-        if ($created) {
+        //$created = Announcement::create($data);
+        $id = Announcement::create($data)->id;
+
+        if ($id) {
+
+            $this->saveUploads($request, $id);
+
             return back()->with('success', 'successfully created.');
         }
 
@@ -103,7 +109,6 @@ class AnnouncementController extends Controller
 
             return back()->withErrors($validator);
         }
-
         $updated = Announcement::where(['id' => $request->id])->update($data);
         if ($updated) {
             return back()->with('success', 'successfully updated.');
@@ -118,6 +123,21 @@ class AnnouncementController extends Controller
 
         if ($deleted) {
             return back()->with('success', 'successfully deleted.');
+        }
+    }
+
+    public function saveUploads(Request $request, $announcementId) {
+
+        if (Input::hasFile('upload_files')) {
+            foreach ($request->upload_files as $file) {
+                $filename = $file->store('attachments');
+
+                $input = [];
+                $input['filename'] = $filename;
+                $input['announcement_id'] = $announcementId;
+
+                Attachment::create($input);
+            }
         }
     }
 }

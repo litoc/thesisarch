@@ -62,7 +62,7 @@
                         @foreach($recentlyAdded as $key => $item)
                         <li class="item">
                           <div class="product-img">
-                            <img src="../img/50x50.png" alt="Product Image">
+                            <img class="img-thumbnail" src="{{ empty($item->image) ? '../admin/img/default.png'  : url($item->image) }}" alt="Product Image" width="304" height="236">
                           </div>
                           <div class="product-info">
                             <a href="javascript:void(0)" class="product-title">{{ $item->title }}</a>

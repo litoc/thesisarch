@@ -46,7 +46,7 @@
                                     <td>{{ $list->category }}</td>
                                     <td>{{ $list->tags }}</td>
                                     <td><span class="label label-success">{{ $list->published_at }}</span></td>
-                                    <td><img class="img-responsive"src="{{ empty($list->image)? '' : url($list->image)  }}" alt="default img" /></td>
+                                    <td><img class="img-responsive"src="{{ empty($list->image)? '/admin/img/default.png' : url($list->image)  }}" alt="default img" /></td>
                                     <td>
                                         <a href="{{ route('update-thesis', ['id' => $list->id]) }}">
                                             <i class="fa fa-pencil"></i>
@@ -89,8 +89,9 @@
                        <div style="font-weight:bold; padding-left:25pt; padding-right: 25pt;">
                        		999999-XXXXXXXXXXXXXXXXXXXX</div>
 					   <div style="font-weight:bold; padding-left:50pt; padding-right: 50pt;">
-                       		The Xs (XXXXXXXXXXXXXXXXXXXX) refer to the Thesis Description<br />
-                       		The dash (-) *must* separate the Thesis Id and Thesis Description<br />
+                       		The 9s (999999) *must* refer to the Thesis Id as shown in the tab 'list'<br />
+                       		The Xs (XXXXXXXXXXXXXXXXXXXX) may refer to the Thesis Title or Description<br />
+                       		The dash (-) *must* separate the Thesis Id and Thesis Title/Description<br />
 					   </div>
 						@if ($errors->any())
     						<div class="alert alert-danger">
