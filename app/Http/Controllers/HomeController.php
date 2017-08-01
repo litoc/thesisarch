@@ -25,12 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        //return view('home');
-        return redirect('/admin/thesis');
-=======
-
-
         $data = [
             'featuredItems' => $this->getFeaturedItems(),
             'announcements' => $this->getAnnouncements(),
@@ -58,6 +52,5 @@ class HomeController extends Controller
         $announcements = Announcement::orderBy('created_at', 'desc')->take(5)->get();
 
         return $announcements;
->>>>>>> master
     }
 }
