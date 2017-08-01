@@ -58,7 +58,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <ul class="products-list product-list-in-box">
-                    @if(!empty($recentlyAdded))
+                    @if(count($recentlyAdded) > 0)
                         @foreach($recentlyAdded as $key => $item)
                         <li class="item">
                           <div class="product-img">
@@ -72,13 +72,21 @@
                           </div>
                         </li>
                         @endforeach
+                    @else
+                        <li class="item">
+                          <div class="text-center">
+                            No record(s) found.
+                          </div>
+                        </li>
                     @endif
                 </ul>
             </div>
             <!-- /.box-body -->
+            @if(count($recentlyAdded) > 0)
             <div class="box-footer text-center">
                 <a href="javascript:void(0)" class="uppercase">View All Thesis</a>
             </div>
+            @endif
             <!-- /.box-footer -->
         </div>
     </div>

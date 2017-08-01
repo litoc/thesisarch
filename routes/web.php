@@ -11,6 +11,7 @@
 |
 */
 // Main site
+<<<<<<< HEAD
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,8 +52,23 @@ Route::group([
     ]);
 
     Route::post('/announcement/create', [
-        'as' => 'create-announcement',
-        'uses' => 'AnnouncementController@create',
+        'as' => 'save-announcement',
+        'uses' => 'AnnouncementController@save',
+    ]);
+
+    Route::get('/announcement/modify/{id}', [
+        'as' => 'update-announcement',
+        'uses' => 'AnnouncementController@update',
+    ]);
+
+    Route::post('/announcement/modify/{id}', [
+        'as' => 'update-announcement',
+        'uses' => 'AnnouncementController@saveUpdate',
+    ]);
+
+    Route::get('/announcement/delete/{id}', [
+        'as' => 'remove-announcement',
+        'uses' => 'AnnouncementController@delete',
     ]);
 
     # Thesis
