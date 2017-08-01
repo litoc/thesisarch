@@ -11,9 +11,10 @@
 |
 */
 // Main site
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as' => 'home',
+    'uses' => 'HomeController@index',
+]);
 
 // Admin site
 Auth::routes();

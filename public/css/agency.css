@@ -598,3 +598,13 @@ ul.social-buttons {
   .btn-xl .badge {
     color: #d9534f;
     background-color: white; }
+
+.intro-searchbar {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  padding: 4%;
+  background-color: rgba(217, 83, 79, 0.64);
+}

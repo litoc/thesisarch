@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Thesis;
+use App\Models\Announcement;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+       // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,34 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+
+        $data = [
+            'featuredItems' => $this->getFeaturedItems(),
+            'announcements' => $this->getAnnouncements(),
+        ];
+
+        return view('welcome', $data);
+    }
+
+    public function getFeaturedItems()
+    {
+        $featuredItems = Thesis::groupBy('type')->orderBy('created_at', 'desc')->get();
+
+        $items = [];
+        foreach($featuredItems as $featuredItem) {
+            $items[] = [
+                'category' => config('categories')[$featuredItem->type],
+            ];
+        }
+
+        return $items;
+    }
+
+    public function getAnnouncements()
+    {
+        $announcements = Announcement::orderBy('created_at', 'desc')->take(5)->get();
+
+        return $announcements;
     }
 }
