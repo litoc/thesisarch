@@ -14,10 +14,10 @@ class AnnouncementsTable extends Migration
     public function up()
     {
         Schema::create('announcements', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->increments('id');
             $table->string('subject');
             $table->text('description');
-            $table->morphs('notifiable');
+            $table->nullableMorphs('notifiable');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
