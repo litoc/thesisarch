@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
+    <meta name="description" content="AMA Thesis Archive">
     <meta name="author" content="">
-    
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -22,14 +23,14 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
 
     <!-- Temporary navbar container fix -->
     <style>
     .navbar-toggler {
         z-index: 1;
     }
-    
+
     @media (max-width: 576px) {
         nav > .container {
             width: 100%;
