@@ -50,7 +50,11 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
+	    'modes' => [
+		'NO_ZERO_DATE',
+     		'ONLY_FULL_GROUP_BY',
+	       ],
             'engine' => null,
         ],
 

@@ -27,7 +27,7 @@
                         <img class="img-fluid" src="img/portfolio/01-thumbnail.jpg" alt="">
                     </div>
                     <div class="portfolio-caption">
-                        <h4>{{ str_plural($featuredItem['category']) }}</h4>
+                        <h4>{{ str_plural($featuredItem) }}</h4>
                     </div>
                 </div>
                 @endforeach

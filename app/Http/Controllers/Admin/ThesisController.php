@@ -176,7 +176,10 @@ class ThesisController extends Controller
         $thesis->category = $categories[$input['category']];
         $thesis->tags = $input['tags'];
         $thesis->published_at = $input['published_at'];
-        $thesis->image = $input['image'];
+
+        if ($filename) {
+            $thesis->image = $filename;
+        }
 
         $save = $thesis->save();
 
