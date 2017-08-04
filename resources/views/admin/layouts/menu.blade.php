@@ -1,5 +1,5 @@
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="left-side sidebar-offcanvas">                
+    <aside class="left-side sidebar-offcanvas">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
@@ -13,11 +13,12 @@
                 </div>
             </div>
             <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
+            <form action="{{ route('search-thesis') }}" method="post" class="sidebar-form">
+            	{{ csrf_field() }}
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                    <input type="text" name="search_item" class="form-control" placeholder="Search thesis..."/>
                     <span class="input-group-btn">
-                        <button type='submit' name='seach' id='search-btn' class="btn btn-flat">
+                        <button type='submit' name='search' id='search-btn' class="btn btn-flat">
                             <i class="fa fa-search"></i>
                         </button>
                     </span>
@@ -46,7 +47,7 @@
         <!-- /.sidebar -->
     </aside>
     <!-- Right side column. Contains the navbar and content of the page -->
-    <aside class="right-side">                
+    <aside class="right-side">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Attachment;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -16,4 +17,8 @@ class Announcement extends Model
 
     protected $fillable = ['subject', 'description'];
     public $timestamps = ['created_at', 'updated_at'];
+
+    public function attachments() {
+        return $this->hasMany(Attachment::class);
+    }
 }

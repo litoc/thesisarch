@@ -8,20 +8,20 @@
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
                         <li class="list-inline-item">
-                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="https://twitter.com/thesisarchive"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.facebook.com/AMA-Thesis-Archive-108368943177786/"><i class="fa fa-facebook"></i></a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
                         <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
+                            <a href="{{ route('show-privacy') }}">Privacy Policy</a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
+                            <a href="{{ route('show-terms') }}">Terms of Use</a>
                         </li>
                     </ul>
                 </div>

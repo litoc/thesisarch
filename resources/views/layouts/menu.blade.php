@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Archive</a>
+                        <a class="nav-link" href="#portfolio">Featured</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#announcement">Announcements</a>

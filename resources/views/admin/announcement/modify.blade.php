@@ -15,7 +15,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" method="post" action="{{ route('update-announcement', $announcement->id) }}">
+            <form class="form-horizontal" method="post" action="{{ route('update-announcement', $announcement->id) }}" enctype="multipart/form-data">
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="box-body">
 					<div class="form-group">
@@ -28,6 +28,12 @@
 						<label for="description" class="col-sm-2 control-label">Description</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" rows="5" name="description" id="description" placeholder="Enter description"> {{ $announcement->description }} </textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="upload_files" class="col-sm-2 control-label">Attachments</label>
+						<div class="col-sm-10">
+							<input type="file" name="upload_files[]" multiple />
 						</div>
 					</div>
 				</div>

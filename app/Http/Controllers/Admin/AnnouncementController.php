@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Attachment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Announcement;
+use App\Models\Attachment;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class AnnouncementController extends Controller
@@ -30,8 +30,10 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::orderBy('created_at', 'desc')->paginate(15);
+        //$announcementsl = Announcement::with('attachments')->get();
+        $announcements = Announcement::with('attachments')->orderBy('created_at', 'desc')->paginate(15);
 
+        //$ctr=0;
         $data = [
             'announcements' => $announcements,
         ];
@@ -77,7 +79,8 @@ class AnnouncementController extends Controller
 
             $this->saveUploads($request, $id);
 
-            return back()->with('success', 'successfully created.');
+            //return back()->with('success', 'successfully created.');
+            return redirect('admin/announcement');
         }
 
     }
@@ -111,7 +114,11 @@ class AnnouncementController extends Controller
         }
         $updated = Announcement::where(['id' => $request->id])->update($data);
         if ($updated) {
-            return back()->with('success', 'successfully updated.');
+
+            $this->saveUploads($request, $request->id);
+
+            //return back()->with('success', 'successfully updated.');
+            return redirect('admin/announcement');
         }
     }
 
@@ -126,14 +133,37 @@ class AnnouncementController extends Controller
         }
     }
 
+    public function deleteAttachment(Request $request, $id)
+    {
+        $attachment = Attachment::find($id);
+
+        $deleted = $attachment->delete();
+
+        if ($deleted) {
+            return back()->with('success', 'successfully deleted.');
+        }
+    }
+
+    public function toggleAnnouncement(Request $request, $id) {
+        $announcement = Announcement::find($id);
+
+        if ($announcement) {
+            $announcement->active = ! $announcement->active;
+        }
+
+        return redirect('admin/announcement');
+    }
+
     public function saveUploads(Request $request, $announcementId) {
 
-        if (Input::hasFile('upload_files')) {
+        if ($request->hasFile('upload_files')) {
             foreach ($request->upload_files as $file) {
                 $filename = $file->store('attachments');
+                $origname = $file->getClientOriginalName();
 
                 $input = [];
                 $input['filename'] = $filename;
+                $input['origname'] = $origname;
                 $input['announcement_id'] = $announcementId;
 
                 Attachment::create($input);

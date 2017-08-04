@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AnnouncementsTable extends Migration
+class CreateAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class AnnouncementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('subject');
-            $table->text('description');
-            $table->nullableMorphs('notifiable');
-            $table->timestamp('read_at')->nullable();
+            $table->integer('announcement_id')->unsigned();
+            $table->foreign('announcement_id')->references('id')->on('announcements')->onDelete('cascade');
+            $table->string('filename');
+            $table->string('origname');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +30,6 @@ class AnnouncementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('announcements');
+        //
     }
 }

@@ -68,6 +68,20 @@ class ThesisController extends Controller
         return view('admin.thesis.list', $data);
     }
 
+    public function search(Request $request) {
+
+        $searchItem = '%' . str_replace('/', '//', $request->search_item) . '%';
+
+        $lists = DB::select('SELECT * FROM thesis
+                WHERE title like ? or description like ?', [$searchItem, $searchItem]);
+
+        $data = [
+            'lists' => $lists
+        ];
+
+        return view('admin.thesis.list', $data);
+    }
+
     public function create()
     {
         $data = [

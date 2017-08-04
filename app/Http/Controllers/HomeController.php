@@ -61,4 +61,14 @@ class HomeController extends Controller
 
         return $announcements;
     }
+
+    public function showPrivacy()
+    {
+        return view('privacy');
+    }
+
+    public function showTerms()
+    {
+        return view('terms');
+    }
 }

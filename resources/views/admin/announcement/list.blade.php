@@ -43,8 +43,29 @@
                                         </a> |
                                         <a href="{{ route('remove-announcement', ['id' => $announcement->id]) }}">
                                             <i class="fa fa-trash"></i>
-                                        </a>
+                                        </a> |
+                                        <a href="{{ route('toggle-announcement', ['id' => $announcement->id]) }}">
+          									<span class="glyphicon {{ $announcement->active ? "glyphicon-ok-circle" : "glyphicon-ban-circle" }}"></span>
+        								</a>
                                     </td>
+                                </tr>
+                                <tr>
+      								<td colspan="5">
+      									Attachments:&nbsp;
+      									<div style="padding-left:3%">
+      									@if (count($announcement->attachments))
+      										@foreach($announcement->attachments as $key => $attachment)
+      											<a href="{{ url($attachment->filename) }}">{{ $attachment->origname }}</a>&nbsp;
+      											<a href="{{ route('remove-attachment', ['id' => $attachment->id]) }}">
+                                            		<i class="fa fa-trash"></i>
+                                        		</a>
+      											<br />
+                                			@endforeach
+                                		@else
+                                			<strong>None</strong>
+     									@endif
+										</div>
+      								</td>
                                 </tr>
                                 @endforeach
                             @endif

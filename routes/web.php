@@ -12,21 +12,52 @@
 */
 // Main site
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/attachments/{filename}', function ($filename)
+{
+    $path = storage_path() . '/app/attachments/' . $filename;
+
+    if(!File::exists($path)) abort(404);
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+
+Route::get('/privacy', [
+    'as' => 'show-privacy',
+    'uses' => 'HomeController@showPrivacy',
+]);
+
+Route::get('/terms', [
+    'as' => 'show-terms',
+    'uses' => 'HomeController@showTerms',
+]);
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/', [
     'as' => 'home',
     'uses' => 'HomeController@index',
 ]);
 
+Route::get('/admin/login', [
+    'as' => 'admin-login',
+    'uses' => 'Auth\LoginController@showLoginForm',
+]);
+
 // Admin site
 Auth::routes();
-Route::get('/admin/login', 'Auth\LoginController@showLoginForm')
-  ->name('adminLogin');
 Route::post('/admin/login', 'Auth\LoginController@login')
   ->name('adminLogin');
 Route::get('/admin/logout', 'Auth\LoginController@logout')
@@ -72,6 +103,17 @@ Route::group([
     Route::get('/announcement/delete/{id}', [
         'as' => 'remove-announcement',
         'uses' => 'AnnouncementController@delete',
+    ]);
+
+
+    Route::get('/announcement/toggle/{id}', [
+        'as' => 'toggle-announcement',
+        'uses' => 'AnnouncementController@toggleAnnouncement',
+    ]);
+
+    Route::get('/announcement/deleteattach/{id}', [
+        'as' => 'remove-attachment',
+        'uses' => 'AnnouncementController@deleteAttachment',
     ]);
 
     # Thesis
@@ -121,5 +163,10 @@ Route::group([
     Route::post('/thesis/create', [
         'as' => 'create-thesis',
         'uses' => 'ThesisController@create',
+    ]);
+
+    Route::post('/thesis/search', [
+        'as' => 'search-thesis',
+        'uses' => 'ThesisController@search',
     ]);
 });

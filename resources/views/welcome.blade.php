@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Featured Thesis</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">This is our list of thesis which our panel members found very promising.</h3>
                 </div>
             </div>
             <div class="row">
@@ -40,7 +40,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Announcements</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">Get the latest information on your thesis class in this page.</h3>
                 </div>
             </div>
             <div class="row">
@@ -74,7 +74,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">AMA Thesis Archive is a comprehensive repository of all published thesis at AMA Computer University.</h3>
                 </div>
             </div>
             <div class="row">
