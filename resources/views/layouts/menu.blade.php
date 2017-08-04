@@ -24,7 +24,18 @@
                         </li>
                     @else
                         <li class="nav-item">
+                            <a class="nav-link" href="#" id="subcribe">Register</a>
+                        </li>
+
+                        <!--<li class="nav-item">
                             <a class="nav-link" href="{{ route('adminLogin') }}">Admin</a>
+                        </li>-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Login as</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" id="loginAsStudent" href="#">Student</a>
+                                <a class="dropdown-item" href="{{ route('adminLogin') }}">Administrator</a>
+                            </div>
                         </li>
                     @endif
 

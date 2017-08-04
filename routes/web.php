@@ -16,6 +16,21 @@ Route::get('/', [
     'uses' => 'HomeController@index',
 ]);
 
+Route::post('subscribe', [
+    'as' => 'student-registration',
+    'uses' => 'StudentController@register',
+]);
+
+Route::post('student/login', [
+    'as' => 'student-login',
+    'uses' => 'StudentController@login',
+]);
+
+Route::get('student/thesis/category/{id?}', [
+    'as' => 'student-thesis',
+    'uses' => 'StudentController@getThesisByCategory',
+]);
+
 // Admin site
 Auth::routes();
 Route::get('/admin/login', 'Auth\LoginController@showLoginForm')
@@ -27,7 +42,7 @@ Route::get('/admin/logout', 'Auth\LoginController@logout')
 
 Route::group([
   'namespace' => 'Admin',
-  //'middleware' => ['auth'],
+  'middleware' => ['auth'],
   'prefix' => 'admin',
 ], function () {
 

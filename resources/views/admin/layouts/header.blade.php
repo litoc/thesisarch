@@ -21,7 +21,8 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="user user-menu">
                     <a href="#">
-                        <span class="hidden-xs">Last logged in: {{ '3hrs ago' }}</span>
+                        <span class="hidden-xs" id="lastLoggedInAt" data-action="{{ $lastLoggedIn }}">
+                        </span>
                     </a>
                 </li>
 
