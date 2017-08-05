@@ -38,17 +38,19 @@ class StudentController extends Controller
         $lists = [];
         foreach ($thesis as $list) {
             $lists[] = [
+                'id' => $list->id,
                 'title' => title_case($list->title),
                 'description' => ucfirst($list->description),
                 'image' => $list->image,
                 'tags' => $list->tags,
+                'members' => 'Member 1, Member 2, Member 3',
                 'published_at' => $list->published_at,
             ];
         }
 
         $data = [
             'allThesis' => $lists,
-            'category' => str_plural(config('categories')[$request->id]),
+            'category' => config('categories')[$request->id],
         ];
 
         return view('thesis', $data);
