@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\Attachment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -29,12 +31,16 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
+        $currentUserId = Auth::id();
+        $lastLoggedIn = User::find($currentUserId)->last_logged_in_at;
+
         //$announcementsl = Announcement::with('attachments')->get();
         $announcements = Announcement::with('attachments')->orderBy('created_at', 'desc')->paginate(15);
 
         //$ctr=0;
         $data = [
             'announcements' => $announcements,
+            'lastLoggedIn' => date('Y-m-d H:i:s', strtotime($lastLoggedIn)),
         ];
 
         return view('admin.announcement.list', $data);

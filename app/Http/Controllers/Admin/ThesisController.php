@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PictureUploadRequest;
 use App\Models\Thesis;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -53,6 +55,9 @@ class ThesisController extends Controller
  //           ->where('images.default_img', true)
 */
 
+        $this->currentUserId = Auth::id();
+        $lastLoggedIn = User::find($this->currentUserId)->last_logged_in_at;
+
         $lists = DB::table('thesis')->get();
 
         /*
@@ -62,7 +67,8 @@ class ThesisController extends Controller
         */
 
         $data = [
-            'lists' => $lists
+            'lists' => $lists,
+            'lastLoggedIn' => date('Y-m-d H:i:s', strtotime($lastLoggedIn))
         ];
 
         return view('admin.thesis.list', $data);
