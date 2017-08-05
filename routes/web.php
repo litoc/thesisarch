@@ -56,6 +56,21 @@ Route::get('/admin/login', [
     'uses' => 'Auth\LoginController@showLoginForm',
 ]);
 
+Route::post('subscribe', [
+    'as' => 'student-registration',
+    'uses' => 'StudentController@register',
+]);
+
+Route::post('student/login', [
+    'as' => 'student-login',
+    'uses' => 'StudentController@login',
+]);
+
+Route::get('student/thesis/category/{id?}', [
+    'as' => 'student-thesis',
+    'uses' => 'StudentController@getThesisByCategory',
+]);
+
 // Admin site
 Auth::routes();
 Route::post('/admin/login', 'Auth\LoginController@login')

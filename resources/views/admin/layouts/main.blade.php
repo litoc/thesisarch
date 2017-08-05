@@ -35,7 +35,7 @@
         </div>
         <!-- /.content-wrapper -->
         @include('admin.layouts.footer')
-        
+
         <!-- jQuery 2.2.3 -->
         <script src="{{ asset('admin/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
         <!-- Bootstrap 3.3.6 -->
@@ -48,6 +48,17 @@
         <script src="{{ asset('../admin/js/app.min.js') }}"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="{{ asset('../admin/js/demo.js') }}"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+                var lastLoggedIn = $('#lastLoggedInAt').attr('data-action');
+                var now = moment(lastLoggedIn).fromNow();
+                $( '#lastLoggedInAt' ).html("Last logged in: " + now);
+            });
+        </script>
     </body>
 
 </html>
