@@ -31,5 +31,21 @@ class UsersTableSeeder extends Seeder
             'email' => 'rufino@amathesisarchive.com',
             'password' => bcrypt('secret'),
         ]);
+
+        $users->insert([
+            'name' => 'Student',
+            'email' => 'student@amathesisarchive.com',
+            'password' => bcrypt('secret'),
+            'student_id' => '2017-0000001',
+            'is_student' => 1,
+        ]);
+
+        $users->insert([
+            'name' => 'Khloe',
+            'email' => 'khloe@amathesisarchive.com',
+            'password' => bcrypt('secret'),
+            'student_id' => '2017-0000002',
+            'is_student' => 1,
+        ]);
     }
 }
