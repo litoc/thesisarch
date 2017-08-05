@@ -29,8 +29,26 @@ class StudentController extends Controller
             return redirect()->route('home');
         }
 
+        $thesis = Thesis::where([
+            'category' => config('categories')[$request->id]
+        ])
+        ->latest()
+        ->get();
+
+        $lists = [];
+        foreach ($thesis as $list) {
+            $lists[] = [
+                'title' => title_case($list->title),
+                'description' => ucfirst($list->description),
+                'image' => $list->image,
+                'tags' => $list->tags,
+                'published_at' => $list->published_at,
+            ];
+        }
+
         $data = [
-            'allThesis' => Thesis::latest()->get()
+            'allThesis' => $lists,
+            'category' => str_plural(config('categories')[$request->id]),
         ];
 
         return view('thesis', $data);
@@ -66,7 +84,7 @@ class StudentController extends Controller
                 'is_student' => 1,
             ])
         ) {
-            $student = User::where(['email' => 'student-admin@amathesisarchive.com'])->first();
+            $student = User::where(['email' => $data['email']])->first();
 
             Auth::loginUsingId($student->id, true);
 

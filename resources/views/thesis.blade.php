@@ -6,8 +6,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Featured Thesis</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">{{ $category }}</h2>
+                    <!--<h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>-->
                 </div>
             </div>
             <div class="row">
@@ -19,10 +19,10 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img class="img-fluid" src="img/portfolio/01-thumbnail.jpg" alt="">
+                        <img class="img-fluid" src="{{ asset('img/portfolio/01-thumbnail.jpg') }}" alt="">
                     </div>
                     <div class="portfolio-caption">
-                        <h4>{{ str_plural($thesis['category']) }}</h4>
+                        <h4>{{ str_plural($thesis['title']) }}</h4>
                     </div>
                 </div>
                 @endforeach
@@ -34,6 +34,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('header').hide();
+            $('nav#mainNav').addClass('navbar-shrink');
         });
 
     </script>
