@@ -5,7 +5,7 @@
                 <div class="intro-lead-in">Thesis Archive</div>
                 <div class="intro-heading"></div>
             </div>
-            <div class="full-header intro-searchbar">
+            <!--<div class="full-header intro-searchbar">
                 <div id="search">
                     <div class="input-group">
                         <input type="text" name="search" id="search-thesis" class="form-control input-lg" placeholder="Search thesis...">
@@ -16,6 +16,6 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </header>

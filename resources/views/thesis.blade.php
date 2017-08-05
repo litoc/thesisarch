@@ -19,7 +19,7 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img class="img-fluid" src="{{ asset('img/portfolio/01-thumbnail.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ empty($thesis->image)? asset('img/no-image-available.jpg') : url($thesis->image) }}" alt="">
                     </div>
                     <div class="portfolio-caption">
                         <h4>{{ str_plural($thesis['title']) }}</h4>
@@ -29,7 +29,7 @@
             </div>
         </div>
     </section>
-
+@endsection
 <!-- Portfolio Modal -->
 @foreach ($allThesis as $thesis)
 <div class="portfolio-modal modal fade" id="portfolioModal{{ $thesis['id'] }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -47,8 +47,8 @@
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
                             <h2>{{ $thesis['title'] }}</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="{{ empty($thesis->image)? '/admin/img/default.png' : url($thesis->image)  }}" alt="">
+                            <!--<p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>-->
+                            <img class="img-responsive img-centered" src="{{ empty($thesis->image)? asset('img/no-image-available.jpg') : url($thesis->image) }}" alt="">
                             <p>{{ $thesis['description'] }}</p>
                             <ul class="list-inline">
                                 <li>Date: {{ $thesis['published_at'] }}</li>
@@ -65,7 +65,6 @@
     </div>
 </div>
 @endforeach
-@endsection
 @push('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
