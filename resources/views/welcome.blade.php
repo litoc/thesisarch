@@ -18,16 +18,16 @@
             <div class="row">
                 @foreach ($featuredItems as $featuredItem)
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <div class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                    <a class="portfolio-link" href="{{ route('student-thesis', $featuredItem['id']) }}">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img class="img-fluid" src="img/portfolio/01-thumbnail.jpg" alt="">
-                    </div>
+                        <img class="img-fluid" src="{{ $featuredItem['image'] }}" alt="">
+                    </a>
                     <div class="portfolio-caption">
-                        <h4>{{ str_plural($featuredItem) }}</h4>
+                        <h4>{{ str_plural($featuredItem['name']) }}</h4>
                     </div>
                 </div>
                 @endforeach

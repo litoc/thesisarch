@@ -36,23 +36,33 @@ class HomeController extends Controller
 
     public function getFeaturedItems()
     {
-        return array_values(config('categories'));
+        $categories = array_values(config('categories'));
+        $data = [];
+        foreach ($categories as $k => $category) {
 
-        //$featuredItems = Thesis::groupBy('thesis.category')->orderBy('created_at', 'desc')->get();
-        $featuredItems = Thesis::select('id', 'category')->groupBy('thesis.category')->orderBy('created_at', 'desc')->get();
-        /*
-        $featuredItems = DB::table('thesis')
-            ->groupBy('thesis.category')
-            ->orderBy('created_at', 'desc')->get();
-        */
-        $items = [];
-        foreach($featuredItems as $featuredItem) {
-            $items[] = [
-                'category' => config('categories')[$featuredItem->category],
+            switch ($category) {
+                case 'Web Application':
+                    $image = asset('img/web-app-default.png');
+                    break;
+                case 'Mobile Application':
+                    $image = asset('img/mob-app-default.png');
+                    break;
+                case 'Robotics':
+                    $image = asset('img/robotics-default.png');
+                    break;
+                default:
+                    $image = asset('img/no-image-available.jpg');
+                    break;
+            }
+
+            $data[] = [
+                'id' => $k+1,
+                'name' => $category,
+                'image' => $image,
             ];
         }
 
-        return $items;
+        return $data;
     }
 
     public function getAnnouncements()

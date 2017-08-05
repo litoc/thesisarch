@@ -46,7 +46,7 @@
                                     <td>{{ $list->category }}</td>
                                     <td>{{ $list->tags }}</td>
                                     <td><span class="label label-success">{{ $list->published_at }}</span></td>
-                                    <td><img class="img-responsive"src="{{ empty($list->image)? '/admin/img/default.png' : url($list->image)  }}" alt="default img" /></td>
+                                    <td><img class="img-responsive" src="{{ empty($list->image)? '/admin/img/default.png' : url($list->image)  }}" alt="default img" /></td>
                                     <td>
                                         <a href="{{ route('update-thesis', ['id' => $list->id]) }}">
                                             <i class="fa fa-pencil"></i>
