@@ -53,7 +53,14 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        return view('admin.announcement.create');
+        $currentUserId = Auth::id();
+        $lastLoggedIn = User::find($currentUserId)->last_logged_in_at;
+
+        $data = [
+            'lastLoggedIn' => date('Y-m-d H:i:s', strtotime($lastLoggedIn)),
+        ];
+
+        return view('admin.announcement.create', $data);
     }
 
     public function save(Request $request)
@@ -92,7 +99,13 @@ class AnnouncementController extends Controller
 
     public function update(Request $request)
     {
-        $data['announcement'] = Announcement::find($request->id);
+        $currentUserId = Auth::id();
+        $lastLoggedIn = User::find($currentUserId)->last_logged_in_at;
+
+        $data = [
+            'announcement' => Announcement::find($request->id),
+            'lastLoggedIn' => date('Y-m-d H:i:s', strtotime($lastLoggedIn)),
+        ];
 
         return view('admin.announcement.modify', $data);
     }

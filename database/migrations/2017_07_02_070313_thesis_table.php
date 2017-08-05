@@ -20,6 +20,8 @@ class ThesisTable extends Migration
             $table->string('category');
             $table->string('tags');
             $table->string('published_at');
+            $table->string('author');
+            $table->string('course');
             $table->string('image');
             $table->nullableTimestamps();
         });

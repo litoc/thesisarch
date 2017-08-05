@@ -90,8 +90,12 @@ class ThesisController extends Controller
 
     public function create()
     {
+        $this->currentUserId = Auth::id();
+        $lastLoggedIn = User::find($this->currentUserId)->last_logged_in_at;
+
         $data = [
             'categories' => config('categories'),
+            'lastLoggedIn' => date('Y-m-d H:i:s', strtotime($lastLoggedIn))
         ];
 
         return view('admin.thesis.create', $data);
@@ -139,9 +143,13 @@ class ThesisController extends Controller
 
         if ($thesis) {
 
+            $this->currentUserId = Auth::id();
+            $lastLoggedIn = User::find($this->currentUserId)->last_logged_in_at;
+
             $data = [
                  'categories' => config('categories'),
-                 'thesis' => $thesis
+                 'thesis' => $thesis,
+                 'lastLoggedIn' => date('Y-m-d H:i:s', strtotime($lastLoggedIn))
             ];
 
             return view('admin/thesis/update', $data);
