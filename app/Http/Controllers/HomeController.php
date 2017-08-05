@@ -57,7 +57,7 @@ class HomeController extends Controller
 
     public function getAnnouncements()
     {
-        $announcements = Announcement::orderBy('created_at', 'desc')->take(5)->get();
+        $announcements = Announcement::orderBy('created_at', 'desc')->where('active',true)->take(5)->get();
 
         return $announcements;
     }

@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Featured Thesis</h2>
-                    <h3 class="section-subheading text-muted">This is our list of thesis which our panel members found very promising.</h3>
+                    <h3 class="section-subheading text-muted">This is our list of thesis which our panel members judged very promising.</h3>
                 </div>
             </div>
             <div class="row">

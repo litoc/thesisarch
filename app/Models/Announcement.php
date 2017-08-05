@@ -15,7 +15,7 @@ class Announcement extends Model
      */
     protected $table = 'announcements';
 
-    protected $fillable = ['subject', 'description'];
+    protected $fillable = ['subject', 'description', 'active'];
     public $timestamps = ['created_at', 'updated_at'];
 
     public function attachments() {

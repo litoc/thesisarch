@@ -149,6 +149,7 @@ class AnnouncementController extends Controller
 
         if ($announcement) {
             $announcement->active = ! $announcement->active;
+            $announcement->save();
         }
 
         return redirect('admin/announcement');
